@@ -3,5 +3,8 @@
 - docker version -> retorna a versão do docker client e do docker server (necessário no caso so windows e 
 macOS abrir o docker desktop antes e no caso do Linux acessar o comando via sudo (user admin)).
 - docker image ls -> lista todas as imagens diponíveis no server
+- docker container ls -> lista os containers em execução ou parados
 - docker pull nginx -> para baixar uma imagem que nesse caso utilizaremos o exemplo do nginx, esse comando é 
 encontrado na página do nginx no docker hub, ele baixa a ultima imagem disponibilizada.
+- docker image rm <image ID> -> exclui uma imagem específica
+- docker run <image name> / <image ID> -> inicia o container a partir da imagem
