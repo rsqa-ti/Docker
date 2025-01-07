@@ -1,0 +1,9 @@
+- FROM node:20.10.0-alpine - referencia a imagem que será utilizada e a versão. Nesse caso está sendo utilizado 
+uma aplicação node versão 20.10.0 e o alpine é uma versão bem mais leve da aplicação.
+- COPY - server.js /opt/app-nodejs/- copia um arquivo para a aplicação no momento que a imagem está sendo 
+criada através do FROM e passamos a diretório onde o arquivo será copiado.
+- CMD comando como se estivéssimos no terminal do linux
+WORKDIR - diretório onde estamos trabalhando na imagem, por exemplo, podemos criar um WORKDIR com o diretório
+/opt/app-nodejs, assim ele saberá desse comando para baixo que tudo estará trabalhando nesse diretório.
+
+

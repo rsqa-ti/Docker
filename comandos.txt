@@ -4,7 +4,12 @@
 macOS abrir o docker desktop antes e no caso do Linux acessar o comando via sudo (user admin)).
 - docker image ls -> lista todas as imagens diponíveis no server
 - docker container ls -> lista os containers em execução ou parados
-- docker pull nginx -> para baixar uma imagem que nesse caso utilizaremos o exemplo do nginx, esse comando é 
-encontrado na página do nginx no docker hub, ele baixa a ultima imagem disponibilizada.
+- docker pull nginx:latest -> para baixar uma imagem que nesse caso utilizaremos o exemplo do nginx, esse 
+comando é encontrado na página do nginx no docker hub, ele baixa a ultima imagem disponibilizada.
+- docker pull nginx:lts - baixa a ultima versão lts que é a versão estável da aplicação
 - docker image rm <image ID> -> exclui uma imagem específica
 - docker run <image name> / <image ID> -> inicia o container a partir da imagem
+- docker build -t app-nodejs . - esse comando executa a imagem conforme está escrito no Dockerfile, no final
+temos que passar o diretório, caso já estivermos trabalhando no mesmo diretório do Dockerfile, colocamos um 
+ponto para indicar que será realizada a criação da imagem do mesmo diretório, caso não seja, devemos inserir o 
+diretório manualmente.
