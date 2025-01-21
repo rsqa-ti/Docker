@@ -2,14 +2,28 @@
 - wsl --status -> para verificar a versão do wsl e se ele está instalado
 - docker version -> retorna a versão do docker client e do docker server (necessário no caso so windows e 
 macOS abrir o docker desktop antes e no caso do Linux acessar o comando via sudo (user admin)).
-- docker image ls -> lista todas as imagens diponíveis no server
+- docker image ls / docker images -> lista todas as imagens diponíveis no server
 - docker container ls -> lista os containers em execução ou parados
 - docker pull nginx:latest -> para baixar uma imagem que nesse caso utilizaremos o exemplo do nginx, esse 
 comando é encontrado na página do nginx no docker hub, ele baixa a ultima imagem disponibilizada.
 - docker pull nginx:lts - baixa a ultima versão lts que é a versão estável da aplicação
 - docker image rm <image ID> -> exclui uma imagem específica
 - docker run <image name> / <image ID> -> inicia o container a partir da imagem
-- docker build -t app-nodejs . - esse comando executa a imagem conforme está escrito no Dockerfile, no final
+- docker build -t <nome_imagem> . - esse comando executa a imagem conforme está escrito no Dockerfile, no final
 temos que passar o diretório, caso já estivermos trabalhando no mesmo diretório do Dockerfile, colocamos um 
 ponto para indicar que será realizada a criação da imagem do mesmo diretório, caso não seja, devemos inserir o 
 diretório manualmente.
+- docker image rm <image ID> / docker dmi <image ID> - remove uma imagem do docker server
+- docker tag <image ID> <nome> - comando utilizado para renomear uma imagem ou para inserir um nome em uma
+imagem sem nome.
+- docker image - lista os comandos que podem ser utilizados relacionados a imagens 
+-- docker image ls --help - nesse caso iremos listar um comando específico do image (ls), ao incluirmos --help
+ele irá listar todas as variantes do image ls
+- docker inspect <image ID> - retorna informações detalhadas da imagem do tipo:
+-- source image - referência do ID da imagem
+-- tag image - nome inserido na criação da imagem
+-- data e hora da criação da imagem
+-- informações do SO (qual é o SO e qual a arquitetura)
+-- size (camada "gravável") e virtualsize (camada somente "leitura")
+-- config - nessa parte do inpect encontramos informações dos comandos inseridos no Dockerfile
+
