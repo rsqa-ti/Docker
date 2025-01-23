@@ -1,0 +1,16 @@
+FROM  alpine:3.19.0
+# instalando dependências no SO - podemos utilizar o comando RUN com multilinha das seguintes formas
+# formato 1
+#RUN apk add --no-cache nodejs
+#RUN apk add --no-cache npm
+#RUN apk add --no-cache git
+# formato 2
+#RUN apk add --no-cache nodejs && \
+#    apk add --no-cache npm && \
+#    apk add --no-cache git
+#formato 3
+RUN <<EOF
+    apk add --no-cache nodejs
+    apk add --no-cache npm
+    apk add --no-cache git
+EOF

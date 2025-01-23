@@ -1,0 +1,35 @@
+FROM  alpine:3.19.0
+
+ENV DESENVOLVEDOR="Ricardo Assis"
+ENV MSG "Variável de ambiente criado no Dockerfile"
+
+RUN <<EOF
+    apk add --no-cache nodejs
+    apk add --no-cache npm
+    apk add --no-cache git
+EOF
+
+#LABEL desenvolvedor="Ricardo Assis"
+#LABEL descricao="imagem criada para o curso de docker da Udemy"
+#LABEL versao="1.0.0"
+
+
+#não pode haver espaço entre a variável, o sinaçl de igual e o valor!
+#ENV FRONT_PRD="https://meuapp.com.br"
+#ENV BACK_PRD="https://meuapp.com.br:3002"
+
+#Sintaxe alternativa sem o "="
+#ENV FRONT_PRD "https://meuapp.com.br"
+#ENV BACK_PRD "https://meuapp.com.br:3002"
+#ENV VERSÃO "1.0.0"
+
+#Sintaxe múltiplas linhas
+#ENV FRONT_PRD "https://meuapp.com.br" \
+#    BACK_PRD "https://meuapp.com.br:3002" \
+#    VERSÃO "1.0.0"
+
+LABEL desenvolvedor=${DESENVOLVEDOR} \
+    descrição="Imagem pasra exemplificar a utilização de Labels no Dockerfile" \
+    versao="1.1"
+
+RUN echo ${MSG} > /tmp/arquivo_criado)durante_o_building_da_imagem.txt

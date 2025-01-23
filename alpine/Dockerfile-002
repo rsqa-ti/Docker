@@ -1,0 +1,11 @@
+FROM  alpine:3.19.0
+
+RUN <<EOF
+    apk add --no-cache nodejs
+    apk add --no-cache npm
+    apk add --no-cache git
+EOF
+
+LABEL desenvolvedor="Ricardo Assis"
+LABEL descricao="imagem criada para o curso de docker da Udemy"
+LABEL versao="1.0.0"

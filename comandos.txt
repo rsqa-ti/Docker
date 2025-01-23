@@ -26,4 +26,13 @@ ele irá listar todas as variantes do image ls
 -- informações do SO (qual é o SO e qual a arquitetura)
 -- size (camada "gravável") e virtualsize (camada somente "leitura")
 -- config - nessa parte do inpect encontramos informações dos comandos inseridos no Dockerfile
-
+- docker run <image ID> <shell> - esse comando é para  abrir o terminal de um SO no caso de um dockerfile que
+somente instala o SO. Essa informação do shell podemos pesquisar na internet ou se acessarmos o Docker Hub, 
+teremos essa informação na linha CMD. Acessamos com esse comando o terminal do SO.
+- docker system prune -a - remove:
+-- todos os containers parados
+-- todas as networks não utilizadas em nenhum container
+-- todas as imagens que não estão associadas a nenhum container
+-- todos os build caches
+- docker image inspect --format='{{json .Config.Labels}}' <image ID> - para filtrar o resultado do inspect,
+nesse caso queremos que retorne um json com a conteúdo do Label contrido dentro de config.

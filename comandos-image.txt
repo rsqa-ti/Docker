@@ -5,5 +5,9 @@ criada através do FROM e passamos a diretório onde o arquivo será copiado.
 - CMD comando como se estivéssimos no terminal do linux
 WORKDIR - diretório onde estamos trabalhando na imagem, por exemplo, podemos criar um WORKDIR com o diretório
 /opt/app-nodejs, assim ele saberá desse comando para baixo que tudo estará trabalhando nesse diretório.
-
-
+- RUN - executa o comando shell na criação da imaegem, por exemplo, podemos instalar pacotes e programas no
+sistema operacional que estamos utilizando para o container.
+- LABEL: Adição de metadados à imagem, ou seja informações complementares que vão descrever amigavelmente 
+algum detalhe sobre a imagem. Dentro do docker inspect <image ID>, temos um campo LABEL.
+- ENV - cria variáveis de ambiente
+- ARG - define argumentos que podem ser encaminhados no build da imagem
