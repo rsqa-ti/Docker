@@ -1,0 +1,31 @@
+ARG ALPINE_VERSION
+ARG FRONT_PRD="https://meuapp.com.br"
+ARG BACK_PRD="https://meuapp.com.br:3002"
+
+FROM  alpine:${ALPINE_VERSION}
+# para realizar o build nesse caso (ARG) devemos insserir os seguintes comandos:
+#docker build --build-arg ALPINE_VERSION=3.18 -t <tag> .
+#No caso por exemplo de um ARG com multiuplas linhas:
+#docker build --build-arg ALPINE_VERSION=3.17 \
+#--build-arg FRONT_PRD=https://meuapp.com.br \
+#--build-arg BACK_PRD=https://meuapp.com.br:3002 \
+#-t <tag> .
+
+ENV DESENVOLVEDOR="Ricardo Assis" \
+    MSG="Variável de ambiente criado no Dockerfile" \
+    FRONT_PRD=${FRONT_PRD} \
+    BACK_PRD=${BACK_PRD} \
+    VERSAO="1.0.1"
+
+RUN <<EOF
+    apk add --no-cache nodejs
+    apk add --no-cache npm
+    apk add --no-cache git
+    apk add --no-cache nano
+EOF
+
+LABEL desenvolvedor=${DESENVOLVEDOR} \
+    descrição="Imagem pasra exemplificar a utilização de Labels no Dockerfile" \
+    versao="1.1"
+
+RUN echo ${MSG} > /tmp/arquivo_criado)durante_o_building_da_imagem.txt

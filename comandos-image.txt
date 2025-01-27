@@ -11,3 +11,9 @@ sistema operacional que estamos utilizando para o container.
 algum detalhe sobre a imagem. Dentro do docker inspect <image ID>, temos um campo LABEL.
 - ENV - cria variáveis de ambiente
 - ARG - define argumentos que podem ser encaminhados no build da imagem
+- A diferença entre o ARG e o ENV é que um (ARG) é inserido no Dockerfile e posteriormente devemos insserir
+o valor padrão no momento do buid e o ENV é inserido no próprio Dockerfile o valor padrão. E no caso de 2
+valores diferentes entre o ARG e o ENV, o valor do ENV irá sobrepor o valor de ARG
+- USER - define o usuário responsável pela execução dos comandos no SO.
+- CMD - comando executado sobre a imagem quando o container é iniciado. A instruição do CMD pode sesr passada
+no build da imagem, quando isso ocorrer o CMD do build se sobrepõe ao do Dockerfile.
