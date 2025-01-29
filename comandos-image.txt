@@ -17,3 +17,18 @@ valores diferentes entre o ARG e o ENV, o valor do ENV irá sobrepor o valor de 
 - USER - define o usuário responsável pela execução dos comandos no SO.
 - CMD - comando executado sobre a imagem quando o container é iniciado. A instruição do CMD pode sesr passada
 no build da imagem, quando isso ocorrer o CMD do build se sobrepõe ao do Dockerfile.
+- ADD - copia arquivos de uma determinada origem do HOST para determinados destinos no container.
+--ADD <origem> <destino>. O comando ADD pode ser utilizado para baixar um arquivo da internet através de uma URL
+- COPY - copia arquivos de uma determinada origem para deterinados destinos na Imagem.
+- ENTRYPOINT - define o processo (serviço) executado dentro do container. É utilizada juntamente com o 
+comando CMD.
+- WORKDIR - define o diretório padrão para as instuções RUN, CMD, ADD, COPY e ou ENTRYPOINT
+- EXPOSE - documenta quais portas deverão ser expostas em tempo de execução do container.
+- VOLUME - cria unidades persistentes de dados
+- Alguns comandos podem ser utilizados quantas vezes forem necessários no Dockerfile:
+--FROM, RUN, ADD, COPY, WORKDIR, VOLUME, LABEL, ENV, ARG, USER e EXPOSE
+- Outras podem ser utilizadas somente uma vez:
+--CMD, ENTRYPOINT
+- No dockerfile, temos comandos para a criação dos containers, esses comandos são tidos como somente leitura
+pois não são modificados quando alteramos algo no container. Já os comandos do container são de gravação,
+ou seja, alteram o estado inicial da imagem, mas o dockerfile não é alterado, somente o container.

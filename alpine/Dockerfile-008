@@ -1,0 +1,20 @@
+FROM  alpine:3.19.0
+
+RUN <<EOF
+    apk add --no-cache nodejs
+    apk add --no-cache npm
+    apk add --no-cache git
+    apk add --no-cache nano
+    apk add --no-cache unzip
+EOF
+
+#Adiciona um usuário no SO (Linux distro Alpine)
+RUN adduser -D ricardo \
+    && addgroup infra \
+    && addgroup ricardo infra
+
+#Define o usuário responsável pela execução dos RUNs
+USER ricardo
+
+#COPY ./arquivos.zip /tmp/teste_copy/
+COPY --chown=ricardo:infra --chmod=777 ./arquivos.zip /tmp/teste_copy/

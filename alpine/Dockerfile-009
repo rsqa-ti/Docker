@@ -1,0 +1,12 @@
+FROM  alpine:3.19.0
+
+#Imprimir um texto no terminal.
+#ENTRYPOINT [ "echo", "Parâmetro 1 Instrrução via ENTRYPOINT" ]
+#No caso desse CMD a seguir, já informamos que o serviço carregado ao iniciar é o echo, portanto é só
+#informar o que será retornado no CMD pra essa função ou serviço
+#CMD ["Parâmetro 2 Instrução via CMD"]
+#CMD ["/bin/sh" , "-c", "echo Parâmetro 1 - Introdução via CMD"]
+
+COPY ./dockerfile-entrypoint.sh /start/dockerfile-entrypoint.sh
+
+ENTRYPOINT [ "/start/dockerfile-entrypoint.sh" ]

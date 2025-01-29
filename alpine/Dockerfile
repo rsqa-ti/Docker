@@ -1,33 +1,20 @@
-ARG ALPINE_VERSION
-ARG FRONT_PRD="https://meuapp.com.br"
-ARG BACK_PRD="https://meuapp.com.br:3002"
+FROM ubuntu
 
-FROM  alpine:${ALPINE_VERSION}
+RUN apt update && apt install build-essential -y
 
-ENV DESENVOLVEDOR="Ricardo Assis" \
-    MSG="Variável de ambiente criado no Dockerfile" \
-    FRONT_PRD=${FRONT_PRD} \
-    BACK_PRD=${BACK_PRD} \
-    VERSAO="1.0.1"
+RUN mkdir /opt/app/
 
-RUN <<EOF
-    apk add --no-cache nodejs
-    apk add --no-cache npm
-    apk add --no-cache git
-    apk add --no-cache nano
-EOF
+WORKDIR /opt/app/
 
-#Adiciona um usuário no SO (Linux distro Alpine)
-RUN adduser -D ricardo
+COPY Main.c .
 
-#Define o usuário responsável pela execução dos RUNs
-USER ricardo
+RUN gcc ./Main.c -static -o Main
 
-LABEL desenvolvedor=${DESENVOLVEDOR} \
-    descrição="Imagem para exemplificar a utilização de Labels no Dockerfile" \
-    versao="1.1"
+#scratch é a imagem base utilisada no container, onde são instalados os SOs
+FROM scratch
 
-RUN echo ${MSG} > /tmp/arquivo_criado)durante_o_building_da_imagem.txt
+#O comando a seguir copia as informações do primeiro estágio onde está o FROM do ubuntu na imagem scratch
+#gerando uma imagem muito menor.
+COPY --from=0 /opt/app/Main /Main
 
-#Cada Dockerfile possui apenas um único CMD e ele se sobrepõe ao CMD herdado com a imagem
-CMD [ "/bin/sh" , "-c" , "echo Comando executado automaticamente quando o container é iniciado" ]
+CMD ["./Main"]

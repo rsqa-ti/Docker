@@ -1,0 +1,19 @@
+FROM  alpine:3.19.0
+
+RUN <<EOF
+    apk add --no-cache nodejs
+    apk add --no-cache npm
+    apk add --no-cache git
+    apk add --no-cache nano
+    apk add --no-cache unzip
+EOF
+
+#Adiciona um usuário no SO (Linux distro Alpine)
+RUN adduser -D ricardo \
+    && addgroup infra \
+    && addgroup ricardo infra
+
+#Define o usuário responsável pela execução dos RUNs
+USER ricardo
+
+ADD --chown=ricardo:infra https://argus-academy.com/cursos/docker_-_dominando_a_criacao_e_o_gerenciamento_de_containers/server.tar.gz /opt/app/

@@ -36,3 +36,5 @@ teremos essa informação na linha CMD. Acessamos com esse comando o terminal do
 -- todos os build caches
 - docker image inspect --format='{{json .Config.Labels}}' <image ID> - para filtrar o resultado do inspect,
 nesse caso queremos que retorne um json com a conteúdo do Label contrido dentro de config.
+- docker container stop <image ID> - pasra a execução do container
+- docker image history <image ID> - histórico de construção de imagem
