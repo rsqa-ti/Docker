@@ -38,3 +38,17 @@ teremos essa informação na linha CMD. Acessamos com esse comando o terminal do
 nesse caso queremos que retorne um json com a conteúdo do Label contrido dentro de config.
 - docker container stop <image ID> - pasra a execução do container
 - docker image history <image ID> - histórico de construção de imagem
+- docker build --target <estágio do build> -t <image ID> - dessa forma eu limito até qual estágio eu
+posso realizar o build, interessante por exemplo para testar todos os estágios do Dockerfile para encontrar
+algum possível erro na imagem.
+- docker image save -o nome_do_arquivo.tar <imagem> - salva uma imagem em uma diretório desejado
+- docker image load -i nome_do_arquivo.tar - importa imagem do diretório salvo
+- docker login - para fazer login no docker hub, temos que informar usuário e senha do docker hub
+- docker logout - para a conexão com o docker hub
+- docker push - para enviar o build para o docker hub, mas para isso o nome do repositório deve
+estar igual ao nome da tag to build
+- docker volume create <nome_do_volume> - podemos criar um volume e depois atachar no container
+- docker volume ls - para listar os volumes existentes
+- docker volume rm <nome do volume> - para remover o volume criado
+- docker volume prune ou docker volume prune --all - quando utilizamos o prune normal ele não exclui volumes 
+para manter as informações, esse comando exclui todos os volumes não utilizados e não atachados
