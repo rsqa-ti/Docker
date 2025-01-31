@@ -1,0 +1,49 @@
+- docker run <nome container> - cria um novo container
+- docker run -d <nome container> - cria um novo container sem travar o terminal durante a execução
+- docker run --name <nome_desejado> <nome container> - cria um container com um nome de nossa
+escolha, se não realizarmos isso o programa cria um nome aleatório
+- docker run --rm <nome container> - remove o container após a execução
+- docker run --cpus <valor desejado> --memory <valor desejado> <nome container> - determina o limite de 
+uso do CPU  e memória pelo container
+- docker update --cpus <valor desejado> --memory <valor desejado> <container ID> - para alterar o valor
+de CPU e memória utilizado anteriormente
+- docker run --gpus all <nome_container> - ativa todas as gpus do host, para um possível trabalho com
+inteligência artificial.
+- docker container ls - lista os containers existentes
+- docker stop <container ID> - utilizado para parar a execução do container.
+- docker ps -a - lista todos ops containers em execução
+- docker restart <container ID> - reinicia um container em execução
+- docker start <container ID> - inicia um container parado
+- docker logs <container ID> - parqa verificar os logs do container até o momento de executar
+o comando.
+- docker stats - ajuda a moinitorar CPU, memória e rede do container em execução
+- docker stats -a - monitora todos os  containers, parados ou em execução
+- docker exec <container ID> <comando> - para executar um comando no container sem a 
+necessidade de abrir o container de forma interativa (-it).
+- docker run -P <nome_imagem> - atibui a porta definida por padrão para a aplicação em execução
+e atribui uma porta aleatória no host. 
+- docker run --env <chave/valor - variável de sistema> <nome da imagem> - criar uma variável de 
+sistema na criação do container, esse valor vai sobrepor o valor do Dockerfile caso tenham o
+mesmo nome, porém esse valor será definido somente no momento da execução, não sendo um 
+dado persistente.
+- docker run --env-file <nome e caminho do arquivo> nome imagem - esse comando permite 
+utilizar variáveis de sistema em um arquivo no host
+- docker cp <nome e caminho no host>:<container ID> <destino no container> - para copiar um 
+aquivo do host para op container
+- docker cp <container ID>:<nome e caminho no container>  <destino no container> - cópia do
+container para o host.
+- docker run -it -w <diretório> <image ID> - definior um diretório de trabalho no container
+caso o caminho informado não exista ele será automaticamente criado.
+- docker run -it -v <diretótio no host>:<diretório no container> <image ID> - esse comando
+é para atachar um volume ao container. A atualização do diretório é automático, assim quando criamos
+um arquivo no host automaticamente esse arquivo é criado no container. Esse volume é do tipo bind mount.
+- docker run --mount tipe=<tipo>,src=<"diretório no host">,target=<diretório container> <image ID> - comando
+para criaçao de um volume no host que será atachado ao container. no campo tipo pode ser:
+--bind
+--volume
+--tmpfs
+- docker diff <container ID> - esse comando lista a diferença do arquiivo base para o arquivo atual, ou seja
+as alterações realizadas após o buils do container. São classificados em:
+--A - Arquivo ou diretório adicionado
+--D - Arquivo ou diretório removido
+--C - Artquivo ou diretório modificado
