@@ -1,0 +1,122 @@
+#Criando meu primeiro docker compose
+
+networks:
+  rede-app:
+  #Compose_rede-app (caso o atributo name não seja definido).
+    name: rede-app
+    driver: bridge
+
+volumes:
+  db-app:
+  nosql-app:
+
+services:
+  http:
+    image: nginx:stable-perl
+    ports:
+      - 8080:80
+      - 8443:443
+    networks:
+      - rede-app
+    depends_on:
+      front-end:
+        condition: service_started
+      back-end:
+        condition: service_started
+  front-end:
+    build: 
+      context: ./front-end/
+      dockerfile: Dockerfile.dev
+      target: dev
+    volumes:
+      - ./front-end:/app
+    ports:
+      - 3000:3000
+    networks:
+      - rede-app
+    depends_on:
+      - back-end
+  back-end:
+    build: 
+      context: ./back-end/
+      dockerfile: Dockerfile
+      target: dev
+    volumes:
+      - ./back-end:/app
+    ports:
+      - 3001:3000
+    networks:
+      - rede-app
+    depends_on:
+      migration:
+        condition: service_completed_successfully
+      db:
+        condition: service_healthy
+      nosql:
+        condition: service_started
+      cache:
+        condition: service_started
+      messaging:
+        condition: service_started
+  migration:
+    image: alpine:latest
+    container_name: migration
+    networks:
+      - rede-app
+    command: sleep 10 
+    depends_on:
+      db:
+        condition: service
+  db:
+    image: postgres:16.6-alpine3.20
+    container_name: db
+    environment:
+      - POSTGRES_PASSWORD=123456
+    volumes:
+      - db-app:/var/lib/postgresql/data
+    networks:
+      - rede-app
+    healthcheck:
+      #test: ["CMD", "pg_isready", "-U", "postgres"]
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 20s
+      timeout: 5s
+      retries: 5
+  db-adminer:
+    container_name: db-adminer
+    image: adminer:4.8.1
+    ports: 
+    - 8090:8080
+    networks:
+      - rede-app
+    depends_on:
+      - db
+
+  nosql:
+    container_name: nosql
+    image: mongo:7.0.8-jammy
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - nosql-app:/data/db
+    env_file:
+      - ./mongo/.env
+    networks:
+      - rede-app
+  #redis redis-sever --save 60 1 --loglevel warning
+  cache:
+    container_name: cache
+    image: redis:7.2.4-alpine3.19
+    command: redis-sever --save 60 1 --loglevel warning
+    ports:
+      - 6379:6379
+    networks:
+      - rede-app
+  messaging:
+    container_name: messaging
+    image: apache/kafka:3.7.0
+    ports:
+      - 9092:9092
+    networks:
+      - rede-app

@@ -1,0 +1,43 @@
+#Criando meu primeiro docker compose
+
+networks:
+  rede-app:
+  #Compose_rede-app (caso o atributo name não seja definido).
+    name: rede-app
+    driver: bridge
+
+volumes:
+  db-app:
+  nosql-app:
+
+services:
+  back-end:
+    build: 
+      context: ./back-end/
+      dockerfile: Dockerfile
+      target: dev
+    volumes:
+      - ./back-end:/app
+    ports:
+      - 3001:3000
+    networks:
+      - rede-app
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: postgres:16.6-alpine3.20
+    container_name: db
+    environment:
+      - POSTGRES_PASSWORD=123456
+    volumes:
+      - db-app:/var/lib/postgresql/data
+    networks:
+      - rede-app
+    healthcheck:
+      #test: ["CMD", "pg_isready", "-U", "postgres"]
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 20s
+      timeout: 5s
+      retries: 5
+ 

@@ -1,0 +1,23 @@
+- docker network ls - lista as redes existentes.
+- docker network create -d <driver rede que será criada> <nome da rede>
+no caso a rede que será criada pode ser:
+-- bridge - rede padrão
+-- host - podemos criar somente uma por rede desse tipo e funciona
+somente no Docker Linux.
+-- overlay
+-- ipvlan
+-- macvlan
+-- null - podemos criar uma por rede desse tipo
+- docker network rm <in ou nome network>
+- docker disconnect network <id ou nome network> <id ou nome container>
+utilizado somente para rede bridge 
+- docker connect network <id ou nome network> <id ou nome container>
+utilizado somente para rede bridge 
+No caso da host devemos pausar o container, excluir e em seguida criar
+novamente.
+- curl http://ip_conatiner:porta - conseguimos acessar o conteúdo
+dp container. O IP pode ser substituiído por host.docker.internal
+ficando -> curl http:// host docker internal:porta. 
+A rede bridje padrão não tenho DNS para resolução de nomes, porém as 
+criadas por demanda tem o DNS instalado por padrão.
+- docker network prune - remove todas as redes não utilizadas

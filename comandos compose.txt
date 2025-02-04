@@ -1,0 +1,20 @@
+- docker compose up - para subir um serviço no docker
+- docker compose up -d - para subir serviços docker sem travar o terminal
+- docker compose down - para remover todos os serviços do ambiente
+- restart no docker compose pode ser:
+-- "no" - esse é o padrão do docker compose
+-- always - sempre restartar o container
+-- on-failure:x - tenta reiniciar enquanto o container estiver retornando algum erro, o valor após
+os 2 pontos seria o total de tentativas, pois se não limitar ele ficará tentando até não retornar
+mais o erro.
+-- unless-stoped: tenta reiniciar até o momento que o container seja parado pelo usuário
+- Depends on - determina qual a sequência o container deve ser inicializado e terminado.
+- Condition - condição pré determinada para a dependência, pode ser:
+--service_started - verifica se o serviço foi inicializado
+--service_healthy - verifica se o serviços está íntegro. Pode ser classificado em:
+---starting
+---service_healthy
+---unhealthy
+--service_completed_successfully - verifica se o container copletou seu ciclo de vida.
+- docker compose -f <nome do compose> up - especifica qual docker compose será utilizado para
+a criação dos containers.
